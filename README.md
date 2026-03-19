@@ -1,75 +1,208 @@
-# React + TypeScript + Vite
+# 📊 Averisk – 물타기 전략 분석 & 리스크 평가 도구
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+평균단가 변화와 투자 리스크를 분석해  
+물타기(추가 매수) 전략의 합리성을 판단하는 금융 의사결정 도구
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🧠 서비스 개요
 
-## React Compiler
+Averisk는 투자자가 추가 매수를 고려할 때  
+단순 평균단가 계산을 넘어 **리스크와 기대 효과를 함께 분석**하여  
+더 합리적인 의사결정을 할 수 있도록 돕는 서비스입니다.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+사용자는 현재 보유 포지션과 추가 매수 조건을 입력하면
 
-Note: This will impact Vite dev & build performances.
+- 평균단가 변화
+- 수익률 변화
+- 리스크 수준
+- 본전 도달 조건
 
-## Expanding the ESLint configuration
+을 직관적으로 확인할 수 있습니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📖 프로젝트 소개
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+기존의 물타기 계산기는 단순히 평균단가만 제공하는 경우가 많습니다.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+하지만 실제 투자에서는 다음과 같은 요소가 중요합니다:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 추가 매수로 인한 리스크 증가
+- 손실 완화 효과
+- 본전까지 필요한 상승률
+- 투자 비중 변화
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Averisk는 이러한 요소를 함께 고려하여  
+**“이 물타기가 정말 합리적인 선택인가?”**를 판단할 수 있도록 설계되었습니다.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## ✨ 핵심 기능
+
+### 📊 1. 물타기 이후 평균단가 계산
+
+- 기존 평단 + 추가 매수를 반영한 새로운 평균단가 계산
+
+---
+
+### 📉 2. 수익률 변화 분석
+
+- 현재 수익률 vs 물타기 이후 수익률 비교
+- 손실 완화 효과 정량화
+
+---
+
+### ⚖️ 3. 의사결정 평가 시스템
+
+- 물타기 전략을 다음과 같이 자동 평가
+
+❌ 리스크 과도 증가
+⚠️ 신중한 판단 필요
+✅ 손실 완화 효과 양호
+
+---
+
+### 🎯 4. 본전 도달 분석
+
+- 수수료를 반영한 본전 가격 계산
+- 현재 기준 필요한 상승률 제공
+
+---
+
+### 🧮 5. 본전 도달을 위한 추가 매수 수량 계산 ⭐
+
+- “현재 가격 기준으로 몇 주를 더 사야 본전인가?” 계산
+- 실제 투자 행동으로 연결되는 핵심 기능
+
+---
+
+### ⚠️ 6. 리스크 점수 시스템 (0 ~ 100)
+
+- 손실 규모
+- 투자 비중 증가
+- 개선 효과
+
+를 종합하여 리스크를 수치화
+
+0 ~ 30 → 안전
+30 ~ 70 → 주의
+70 ~ 100 → 위험
+
+---
+
+### 💰 7. 수수료 반영 분석
+
+- 0.05% / 0.1% / 0.2% 선택 가능
+- 직접 입력 기능 제공
+- 수수료 적용 시 결과 재계산
+
+---
+
+## 🌱 서비스 차별점
+
+### 1) 단순 계산 → 의사결정 도구로 확장
+
+기존 서비스:
+
+> “평균단가 얼마입니다”
+
+Averisk:
+
+> “이 전략은 리스크가 크고 효과가 제한적입니다”
+
+---
+
+### 2) 행동까지 연결되는 UX
+
+- 단순 정보 제공 ❌
+- 실제 행동 유도 ⭕
+
+👉 “몇 주를 더 사야 하는가”까지 제시
+
+---
+
+### 3) 리스크 정량화
+
+감각적인 판단이 아닌  
+**데이터 기반 리스크 점수 제공**
+
+---
+
+### 4) 직관적인 금융 UX
+
+- 색상 기반 위험도 표시 (초록 / 노랑 / 빨강)
+- 한 화면에서 모든 핵심 정보 확인
+
+---
+
+## ⚙️ 기술 스택
+
+| 구분            | 기술              |
+| --------------- | ----------------- |
+| Frontend        | React, TypeScript |
+| Build Tool      | Vite              |
+| Styling         | Tailwind CSS      |
+| State           | React Hooks       |
+| Version Control | Git, GitHub       |
+
+---
+
+## 📂 프로젝트 구조
+
+src/
+├── components/
+├── App.tsx
+├── main.tsx
+└── styles/
+
+---
+
+## 🎯 핵심 로직
+
+### 평균단가 계산
+
+(기존 총액 + 추가 매수 금액) / 총 수량
+
+---
+
+### 리스크 점수 계산
+
+리스크 = 손실률 + 투자 비중 증가 - 개선 효과
+
+---
+
+### 본전 도달 매수 수량
+
+현재 가격 기준으로
+평균단가를 현재가까지 낮추기 위한 추가 매수 수량 계산
+
+---
+
+## 💡 프로젝트 의의
+
+Averisk는 단순한 계산기가 아닌  
+**투자 판단을 돕는 금융 분석 도구**를 목표로 합니다.
+
+이 프로젝트를 통해
+
+- 금융 도메인 이해
+- 데이터 기반 의사결정 설계
+- 사용자 행동 중심 UX 설계
+
+를 구현했습니다.
+
+---
+
+## 🌟 비전
+
+“숫자가 아니라, 판단을 제공하는 금융 도구”
+
+Averisk는 투자자가 감이 아닌  
+**데이터 기반으로 의사결정을 내릴 수 있도록 돕는 서비스**를 지향합니다.
+
+---
+
+## 👤 개발자
+
+개인 프로젝트 (Frontend 중심)
